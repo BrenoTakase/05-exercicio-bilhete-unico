@@ -20,7 +20,7 @@ public class BilheteUnico {
     }
 
     //método para carregar o bilhete
-    public double CarregarBilhete(int valor){
+    public double CarregarBilhete(double valor){
     this.saldo += valor;
     return saldo;
     }

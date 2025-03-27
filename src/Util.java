@@ -28,7 +28,9 @@ public class Util {
                 case 1:
                     menuAdministrador();
                 break;
-
+                case 2:
+                    menuUsuario();
+                break;
             }
 
         }while (opcao != 3);
@@ -50,7 +52,9 @@ public class Util {
                 case 2:
                     listaBilhete();
                 break;
-
+                case 3:
+                    excluirBilhete();
+                break;
             }
 
         }while(opcao != 4);
@@ -83,5 +87,81 @@ public class Util {
         }
         showMessageDialog(null, aux);
     }
+
+    private void excluirBilhete() {
+        int resposta;
+        int indice = pesquisar();
+        if (indice != -1){
+            resposta = showConfirmDialog(null, "Tem certeza que deseja excluir?");
+            if(resposta == YES_OPTION){
+                bilhete[indice] = bilhete[index-1];
+                index--;
+            }
+        }
+    }
+
+    private void menuUsuario() {
+        int opcao;
+        String menu = "1. Carregar bilhete \n2. Consultar saldo \n" +
+                      "3. Passar na catraca \n 4. Sair";
+
+        do {
+            opcao = parseInt(showInputDialog(menu));
+            if(opcao < 1 || opcao > 4){
+                showMessageDialog(null, "Opção inválida");
+            }
+            else {
+                switch (opcao) {
+                    case 1:
+                        carregarBilhete();
+                        break;
+                    case 2:
+                        consultarSaldo();
+                        break;
+                    case 3:
+                        passarNaCatraca();
+                        break;
+                }
+            }
+        } while(opcao !=4);
+    }
+
+    private void carregarBilhete() {
+        int indice = pesquisar();
+        double valor;
+        if (indice != -1){
+            valor = parseDouble(showInputDialog("Valor da recarga: "));
+            bilhete[indice].CarregarBilhete(valor);
+        }
+    }
+
+    private void consultarSaldo() {
+        int indice = pesquisar();
+        double valor;
+        if (indice != -1){
+            showMessageDialog(null, "Saldo = R$ "+ bilhete[indice].ConsultaSaldo());
+        }
+    }
+
+    private void passarNaCatraca() {
+        int indice = pesquisar();
+        double valor;
+        if (indice != -1){
+            showMessageDialog(null, bilhete[indice].PassarCatraca());
+        }
+    }
+
+    //metodo para encontrar o bilhete
+    private int pesquisar() {
+        long cpf= parseLong(showInputDialog("Qual seu CPF: "));
+        for (int i=0; i < index; i++){
+            if (cpf == bilhete[i].usuario.cpf) {
+                return i;
+            }
+        }
+        showMessageDialog(null, cpf + " não encontrado");
+            return -1;
+    }
+
 
 }
