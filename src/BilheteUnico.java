@@ -15,7 +15,7 @@ public class BilheteUnico {
         //Cria um metodo para conseguir colocar um número aleatório
         Random random = new Random();
         numero = random.nextLong(1000, 10000);
-        //Cria o metodo Usuário, que antes disso ainda não tinha sido chamado
+        //Cria o metodo Usuário, antes disso ele ainda não tinha sido chamado
         usuario = new Usuario(nome, cpf, perfil);
     }
 
